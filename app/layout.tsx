@@ -1,28 +1,28 @@
+import DesignerContextProvider from "@/shared/components/context/DesignerContext";
+import { Toaster } from "@/shared/components/ui/toaster";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import Providers from "@/shared/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Form Builder",
-  description: "Build / Customize forms.",
+  title: "Formik",
+  description: "Form Builder",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en">
         <body className={inter.className}>
-          <Providers>
+          <NextTopLoader />
+          <DesignerContextProvider>
             {children}
-          </Providers>
+            <Toaster />
+          </DesignerContextProvider>
         </body>
       </html>
     </ClerkProvider>
